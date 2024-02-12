@@ -1,12 +1,10 @@
 import React from 'react';
 
-const Articles = () => {
+export const Articles = () => {
   return (
     <div>
-      <h1>Articles</h1>
+      <h3>Articles</h3>
       {/* Add your content here */}
     </div>
   );
 };
-
-export default Articles;
