@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Create = () => {
+export const Create = () => {
   return (
     <div>
       {/* Your component content here */}
@@ -8,4 +8,3 @@ const Create = () => {
   );
 };
 
-export default Create;

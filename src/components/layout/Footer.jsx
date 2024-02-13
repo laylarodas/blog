@@ -1,11 +1,10 @@
 import React from 'react';
 
-const Footer = () => {
+export const Footer = () => {
   return (
-    <footer>
-      {/* Footer content */}
+    <footer className='footer'>
+      &copy; Master en JavaScript ES12 y TypeScript - <a href="http://laylarodasweb.es">laylarodasweb.es</a>
     </footer>
   );
 };
 
-export default Footer;
