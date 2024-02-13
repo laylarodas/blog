@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Global } from '../../helpers/Global';
-
+import { Petition } from '../../helpers/Petition';
 
 export const Articles = () => {
 
@@ -12,19 +12,12 @@ export const Articles = () => {
   }, []);
 
   const getArticles = async () => {
-    const url = Global + 'articles';
-    let petition = await fetch(url, {
-      method: 'GET'
-    }
-    );
 
-    let result = await petition.json();
+    const url = Global.url + 'articles';
+    const {data, loading}= await Petition(url, "GET");
 
-
-    console.log(result);
-
-    if (result.status === "success") {
-      setArticles(result.articles);
+    if (data.status === "success") {
+      setArticles(data.articles);
     }
   }
 
