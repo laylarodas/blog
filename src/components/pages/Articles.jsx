@@ -2,10 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { Global } from '../../helpers/Global';
 import { Petition } from '../../helpers/Petition';
+import { List } from './List';
 
 export const Articles = () => {
 
   const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getArticles();
@@ -19,30 +21,19 @@ export const Articles = () => {
     if (data.status === "success") {
       setArticles(data.articles);
     }
+
+    setLoading(false);
   }
 
   return (
     <>
-      {articles.length >= 1 ?
-        articles.map((article) => {
-          return (
-            <article key={article.id} className='articleItem'>
-              <div className='mask'>
-                <img src="/images.jpg" alt="" />
-              </div>
-              <div className='info'>
-                <h3 className='title'>{article.title}</h3>
-                <p className='description'>{article.content}</p>
+      {loading ? <p>Loading...</p> : 
 
-                <button className='edit'>Edit</button>
-                <button className='delete' >Delete</button>
-              </div>
-            </article>
-          )
-        })
-        : <p>There are no articles to show</p>
+        articles.length >= 1 ? 
+            <List articles={articles} setArticles={setArticles}/> 
+            : <p>There are no articles to show</p>
+
       }
-
     </>
   );
 };
