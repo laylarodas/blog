@@ -20,6 +20,23 @@ export const Create = () => {
    
     if(data.status == "success"){
       setResult("saved");
+
+        const fileInput = document.querySelector('#image');
+        
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+
+        console.log(formData);
+        let upload = await Petition(`${Global.url}upload/${data.article._id}`, "POST", formData, true);
+
+        console.log(upload.data);
+
+        if(upload.data.status == "success"){
+          setResult("saved");
+        }else{
+          setResult("error");
+        }
+
     }else{
       setResult("error");
     }

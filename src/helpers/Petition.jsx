@@ -1,4 +1,4 @@
-export const Petition = async (url, method, dataSave = "") => {
+export const Petition = async (url, method, dataSave = "", files = false) => {
 
 
     let loading = true;
@@ -14,12 +14,22 @@ export const Petition = async (url, method, dataSave = "") => {
     }
 
     if (method == "POST" || method == "PUT") {
-        options = {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataSave)
+
+        let body = "";
+
+        if (files) {
+            options = {
+                method: method,
+                body: dataSave
+            }
+        }else{
+            options = {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataSave)
+            }
         }
     }
 
