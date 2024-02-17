@@ -24,8 +24,7 @@ export const Petition = async (url, method, dataSave = "") => {
     }
 
 
-
-    const petition = await fetch(url);
+    const petition = await fetch(url,options);
     const data = await petition.json();
 
     loading = false;

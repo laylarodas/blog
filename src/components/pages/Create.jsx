@@ -1,15 +1,30 @@
 import React from 'react';
 import { useState } from 'react';
-import UseForm from '../../hooks/useForm'
+import {useForm} from '../../hooks/useForm'
+import {Petition} from '../../helpers/Petition';
+import {Global} from '../../helpers/Global';
+
 
 export const Create = () => {
 
-  const {form, sent, changed} = UseForm({});
+  const {form, sent, changed} = useForm({});
+  const [result, setResult] = useState("notsend");
 
-  const saveArticle = (e) => {
+  const saveArticle =  async (e) => {
     e.preventDefault();
-    let newArticle = JSON.stringify(form);
-    console.log(newArticle);
+
+    let newArticle = form;
+
+    let {data, loading} = await Petition(`${Global.url}create`, "POST", newArticle);
+
+   
+    if(data.status == "success"){
+      setResult("saved");
+    }else{
+      setResult("error");
+    }
+
+    
   }
 
 
@@ -18,8 +33,18 @@ export const Create = () => {
       <h1>Create Article</h1>
       <p>Form</p>
       <pre>{JSON.stringify(form)}</pre>
+      <strong>{
+        result && result == "saved" ? "article saved successfully." : ""
+      }</strong>
 
-      <form action="" className='form' onSubmit={saveArticle}>
+      <strong>
+        {
+          result && result == "error" ? "Error saving article." : ""
+        }
+      </strong>
+
+
+      <form action="post" className='form' onSubmit={saveArticle}>
         <div className='formGroup'>
           <label htmlFor="title">Title</label>
           <input type="text" name='title' onChange={changed}/>
