@@ -1,6 +1,8 @@
 import React from 'react';
 import {Global} from '../../helpers/Global';
 import { Petition } from '../../helpers/Petition';
+import {Link} from 'react-router-dom';
+
 
 export const List = ({articles,setArticles}) => {
 
@@ -25,7 +27,7 @@ export const List = ({articles,setArticles}) => {
               {article.image == "default.png" && <img src={Global.url+ "image/default.png"} alt="" />}
             </div>
             <div className='info'>
-              <h3 className='title'>{article.title}</h3>
+              <h3 className='title'><Link to={`/detail/${article._id}`}>{article.title}</Link></h3>
               <p className='description'>{article.content}</p>
 
               <button className='edit'>Edit</button>
