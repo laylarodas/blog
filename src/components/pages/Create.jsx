@@ -17,11 +17,16 @@ export const Create = () => {
 
     let {data, loading} = await Petition(`${Global.url}create`, "POST", newArticle);
 
-   
     if(data.status == "success"){
       setResult("saved");
+    }else{
+      setResult("error");
+    }
 
-        const fileInput = document.querySelector('#image');
+    const fileInput = document.querySelector('#image');
+   
+    if(data.status == "success" && fileInput.files[0] != undefined){
+      setResult("saved");
         
         const formData = new FormData();
         formData.append('image', fileInput.files[0]);
@@ -37,8 +42,6 @@ export const Create = () => {
           setResult("error");
         }
 
-    }else{
-      setResult("error");
     }
 
     
