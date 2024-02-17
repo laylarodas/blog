@@ -4,6 +4,7 @@ import { Home } from "../components/pages/Home";
 import { Articles } from "../components/pages/Articles";
 import {Detail} from '../components/pages/Detail';
 import { Create } from "../components/pages/Create";
+import { Edit } from "../components/pages/Edit";
 import { Search } from '../components/pages/Search';
 import { Contact } from '../components/pages/Contact';
 import { Header } from '../components/layout/Header';
@@ -28,6 +29,7 @@ const RoutesApp = () => {
             <Route path='/create' element={<Create />}/>
             <Route path='/search/:search' element={<Search />}/>
             <Route path='/detail/:id' element={<Detail />}/>
+            <Route path='/edit/:id' element={<Edit />}/>
             <Route path='/contact' element={<Contact />}/>
             <Route path='*' element={ 
               <div className='jumbo'>
