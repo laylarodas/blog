@@ -1,7 +1,20 @@
 import React from 'react';
 import {Global} from '../../helpers/Global';
+import { Petition } from '../../helpers/Petition';
 
 export const List = ({articles,setArticles}) => {
+
+  const deleteArticle = async (id, setArticles) => {
+    
+    let {data} = await Petition(`${Global.url}article/${id}`, "DELETE");
+
+    if(data.status == "success"){
+      const updatedArticles = articles.filter(article => article._id !== id);
+      setArticles(updatedArticles);
+    }
+  }
+
+
   return (
     articles.map((article) => {
         return (
@@ -16,7 +29,9 @@ export const List = ({articles,setArticles}) => {
               <p className='description'>{article.content}</p>
 
               <button className='edit'>Edit</button>
-              <button className='delete' >Delete</button>
+              <button className='delete' onClick={() => {
+                deleteArticle(article._id, setArticles)
+              }}>Delete</button>
             </div>
           </article>
         )
